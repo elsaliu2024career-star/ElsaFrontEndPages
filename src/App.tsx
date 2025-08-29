@@ -2,6 +2,8 @@
 import NameCardGrid from "./component/NameCardGrid";
 import NaviBar from "./component/NaviBar";
 import { BottomDrawer } from "./component/BottomDrawer";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
   /*
@@ -17,7 +19,7 @@ function App() {
 
   let heading = "Elsa's Favorite Companies";
   */
-
+  /*
   const data = [
     {
       person_name: "Elsa Zhang",
@@ -102,7 +104,19 @@ function App() {
       rating: 4,
       review: "Creative marketer who enjoys connecting products with people.",
     },
-  ];
+  ]; */
+  
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios.get("http://172.20.10.2:8000/reviews/")
+    .then((res) => setData(res.data))
+    .catch((err: string) => console.log(err))
+   }, [])
+
+  console.log(typeof data);   // "object" if it's already parsed
+  //console.log(Array.isArray(data)); // true if it's an array
+  console.log(data);          // inspect the structure
+
 
   const ChatMessages = [
     {
