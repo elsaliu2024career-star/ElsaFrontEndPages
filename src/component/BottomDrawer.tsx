@@ -41,21 +41,22 @@ export function FrindChatBox({ avatar, name, last_message }: ChatFriend) {
     y: 150,
   });
 
-  const CurrentBoxState=React.useRef(false);
+  const CurrentBoxState = React.useRef(false);
 
   React.useEffect(() => {
-    CurrentBoxState.current = ChatBoxShow;}, [ChatBoxShow]);
+    CurrentBoxState.current = ChatBoxShow;
+  }, [ChatBoxShow]);
 
   const HandleChatBoxClick = () => {
     console.log("the chat box is opened");
 
-    if ( !CurrentBoxState.current) {
-        ActiveWindowIndex += 1;
-        setPosition({
-          x: 150 + ActiveWindowIndex * 20,
-          y: 150 + ActiveWindowIndex * 20,
+    if (!CurrentBoxState.current) {
+      ActiveWindowIndex += 1;
+      setPosition({
+        x: 150 + ActiveWindowIndex * 20,
+        y: 150 + ActiveWindowIndex * 20,
       });
-      } ;
+    }
     //countRef.current += 1;
     //ActiveWindowIndex += 1;
     //zIndexCount += 1;
@@ -71,13 +72,15 @@ export function FrindChatBox({ avatar, name, last_message }: ChatFriend) {
 
   const TopActiveBox = () => {
     setzIndexProps(++zIndexCount.current);
-  }
+  };
 
   const HandleClose = () => {
     console.log("the chat box is closed");
-    ActiveWindowIndex --;
+    ActiveWindowIndex--;
 
-    if (ActiveWindowIndex === 0){zIndexCount = { current: 1000 };};
+    if (ActiveWindowIndex === 0) {
+      zIndexCount = { current: 1000 };
+    }
 
     console.log(
       "the count of the chat box after close is: ",
@@ -90,7 +93,7 @@ export function FrindChatBox({ avatar, name, last_message }: ChatFriend) {
     <div>
       <button
         type="button"
-        className="btn btn-outline-info friend-chat-box"
+        className="friend-chat-box"
         onClick={HandleChatBoxClick}
       >
         <div className="avatar">{avatar}</div>
@@ -127,9 +130,8 @@ export function ChatBox({
 }: ChatFriend & CloseProps & PositionProps & zIndexProps & TopActiveProps) {
   console.log("the chat box is shown");
   //const [ClikeActiveBox, setClikeActiveBox] = React.useState(zIndex);
-//  console.log("the passed zIndex is: ",zIndex);
+  //  console.log("the passed zIndex is: ",zIndex);
   //console.log("the current ClikeActiveBox is: ",ClikeActiveBox);
-
 
   return (
     <div

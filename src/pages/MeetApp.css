@@ -1,0 +1,81 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  height: 100vh;
+  background-color: lightblue;
+}
+
+.panel {
+  width: 360px;
+  height: 780px;
+  background-color: rgb(231, 228, 228);
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.topbar {
+  font-size: large;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(255, 160, 64);
+  height: 40px;
+  padding: 10px; 
+}
+
+.panel-content{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.block-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.content-layout {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}
+
+.shedule-content {
+  font-size: larger;
+  background-color: rgb(156, 234, 248);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+.list-content{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.button-style{
+    display: flex;
+    border-radius: 10px;
+    width: 300px;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

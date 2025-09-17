@@ -244,18 +244,20 @@ color:firebrick
 }
 
 .friend-chat-box{
+  display: flex;
   width: 100%;
   height: 80px;
   padding: 10px;
   border-radius: 8px;
   border: lightskyblue 1px solid;
-  background-color: #d3e0ff;
+  background-color:lemonchiffon;
   cursor: pointer;
-  display: flex;
   align-items: center;
   gap: 30px;
   transition: all 0.3s ease;
-  
+  flex-direction: row;
+  justify-content: flex-start;
+  box-sizing: border-box;
 }
 
 .friend-chat-box:hover{

@@ -1,5 +1,5 @@
 import { NameCard } from "./NameCard.tsx";
-import type { Props } from '../type';
+import type { Props } from "../type";
 import "./NameCard.css";
 import { useState } from "react";
 
@@ -10,7 +10,6 @@ export interface Props {
 */
 
 function NameCardGrid({ data }: Props) {
-
   const [showAll, setshowAll] = useState(false);
   const ContentDisplay = () => {
     setshowAll(!showAll);
@@ -23,7 +22,7 @@ function NameCardGrid({ data }: Props) {
       <div className="panel-menu">
         <div className="panel-title">People you may know from Amazon</div>
         <div className="toggle-button" onClick={ContentDisplay}>
-          {showAll? "Show less ▲" : "Show more ▼"} 
+          {showAll ? "Show less ▲" : "Show more ▼"}
         </div>
       </div>
       <div className="name-card-grid">

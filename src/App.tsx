@@ -117,7 +117,17 @@ function App() {
   //console.log(Array.isArray(data)); // true if it's an array
   console.log(data);          // inspect the structure
 
-
+/*
+   const [ChatMessages, setChatMessages] = useState([]);
+  useEffect(() => {
+    axios.get("http://172.20.10.2:8000/chat-messages/")
+    .then((res) => setChatMessages(res.data))
+    .catch((err: string) => console.log(err))
+   }, [])
+   
+   console.log(ChatMessages);
+   */
+  
   const ChatMessages = [
     {
       avatar: "E",
@@ -173,8 +183,8 @@ function App() {
       <ListGroup items={items} heading={heading} />
     </div>
   );
-}
-  */
+}*/
+  
 
   return (
     <div>
