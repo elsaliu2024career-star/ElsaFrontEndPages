@@ -117,7 +117,7 @@ function App() {
   //console.log(Array.isArray(data)); // true if it's an array
   console.log(data);          // inspect the structure
 
-/*
+
    const [ChatMessages, setChatMessages] = useState([]);
   useEffect(() => {
     axios.get("http://172.20.10.2:8000/chat-messages/")
@@ -126,7 +126,7 @@ function App() {
    }, [])
    
    console.log(ChatMessages);
-   */
+  /*
   
   const ChatMessages = [
     {
