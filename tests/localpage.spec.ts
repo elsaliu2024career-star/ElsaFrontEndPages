@@ -1,26 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
-
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});
-
-/*
-import { test, expect } from '@playwright/test';
-
-test('test', async ({ page }) => {
+test('verify code hero page', async ({ page }) => {
   await page.goto('http://localhost:5173/');
   await expect(page.getByText('People you may know from')).toBeVisible();
   await expect(page.getByText('Elsa Zhang')).toBeVisible();
@@ -28,6 +8,11 @@ test('test', async ({ page }) => {
   await expect(page.locator('#root')).toContainText('Software Engineer');
   await expect(page.getByText('Product Manager')).toBeVisible();
   await expect(page.getByRole('button', { name: 'Online Friends' })).toBeVisible();
+
+});
+
+test('verify code hero online friends drawer', async ({ page }) => {
+  await page.goto('http://localhost:5173/');
   await page.getByRole('button', { name: 'Online Friends' }).click();
   await expect(page.getByRole('button', { name: 'E Elsa Zhang Message' })).toBeVisible();
   await expect(page.locator('#root')).toContainText('Message 1');
@@ -35,4 +20,4 @@ test('test', async ({ page }) => {
   await expect(page.getByText('Maria Lopez').nth(2)).toBeVisible();
   await expect(page.getByText('Message 3').nth(1)).toBeVisible();
 });
-*/
+
