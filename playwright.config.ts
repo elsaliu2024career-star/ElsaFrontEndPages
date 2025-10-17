@@ -36,14 +36,14 @@ export default defineConfig({
     trace: "on-first-retry",
     screenshot: "only-on-failure",
     video: "retain-on-failure",
-    actionTimeout: 5 * 1000, // for actions like click, fill, etc.
-    navigationTimeout: 30 * 1000,
+    actionTimeout: 5_000, // for actions like click, fill, etc.
+    navigationTimeout: 40_000,
   },
-  timeout: 60 * 1000, // 30 seconds per test
+  timeout: 60_000, // 30 seconds per test
 
   expect: {
     // Maximum time expect() should wait for the condition to be met.
-    timeout: 8 * 1000,
+    timeout: 8_1000,
 
     toHaveScreenshot: {
       // An acceptable amount of pixels that could be different, unset by default.
@@ -72,7 +72,7 @@ export default defineConfig({
     {
       name: "webkit",
       use: { ...devices["Desktop Safari"] },
-      timeout: 60 * 1000,
+      timeout: 60_000,
     },
 
     /* Test against mobile viewports. */

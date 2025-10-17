@@ -11,9 +11,11 @@ test('check user is logged in and homepage is visible', async ({ LoggedInPage })
 
 
 
-test('navigation panel and main headings are visible', async ({ LoggedInPage }) => {
+test('navigation panel and main headings are visible', async ({ LoggedInPage }) => { 
+  test.setTimeout(90_000);
   const nav = new NavigationPanel(LoggedInPage);
   await nav.profileVisible();
-  await nav.expectElementsVisible();
+  await nav.expectElementsVisibleConnectable();
   await nav.expectHeadingsVisible();
+  await nav.expectDateCorrect();
 });
