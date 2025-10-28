@@ -7,12 +7,13 @@ import {
 } from "@playwright/test";
 import fs from "fs/promises";
 import dotenv from 'dotenv';
-dotenv.config();
+dotenv.config(); //import environment variables from .env file
 
 
-
+// To perform login with environment variables to ABC website
+//example usage: await performLogin(page);
 async function performLogin(page: Page) {
-  await page.goto(process.env.ABC_BASE_URL!);
+  await page.goto(process.env.ABC_BASE_URL! , { waitUntil: 'networkidle' });
   await baseExpect(page.getByRole("button", { name: "Log In" })).toBeVisible({
     timeout: 10_000,
   });
@@ -42,6 +43,10 @@ async function performLogin(page: Page) {
   // await expect(page.getByTestId('user-avatar')).toBeVisible({ timeout: 10000 });
 }
 
+
+// externd the base test to include a LoggedInPage fixture
+// wait unti the fixture is called and teared down
+
 export const test = base.extend<{
   LoggedInPage: Page;
 }>({
@@ -65,12 +70,12 @@ export const test = base.extend<{
       if (storageExists) {
         // quick check if user is logged in
         console.log("✅Use the cached logged state");
-        await page.goto(process.env.ABC_BASE_URL!);
+        await page.goto(process.env.ABC_BASE_URL! , { waitUntil: 'networkidle' });
 
 
-        // Wait up to 27 seconds for the 'Elsa' button to appear
+        // Wait up to 17 seconds for the 'Elsa' button to appear
         const elsaButton = page.getByRole("button", { name: "Elsa" });
-        await elsaButton.waitFor({ timeout: 17*1000 }).catch(() => {
+        await elsaButton.waitFor({ timeout: 17_1000 }).catch(() => {
           console.log("the 'Elsa' does not appear till time out");
         });
 

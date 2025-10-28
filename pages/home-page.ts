@@ -2,7 +2,7 @@ import { Page, Locator, expect } from "@playwright/test";
 import dotenv from "dotenv";
 dotenv.config();
 
-// Function to get today's date in "Thursday 16 October 2025" format
+// Function to get today's date in "Thursday 16 October 2025" format, to test the formatted date on the page
 export function getTodayFormatted(): string {
   const todayMelbourne = new Date().toLocaleDateString("en-AU", {
     timeZone: "Australia/Melbourne",
@@ -17,7 +17,15 @@ export function getTodayFormatted(): string {
   return `${todayMelbourne}`;
 }
 
+// Navigation Panel class to encapsulate navigation panel interactions and verifications
+// exameple usage:
+// const navPanel = new NavigationPanel(page);
+// await navPanel.profileVisible();
+// await navPanel.expectElementsVisibleConnectable();
+// await navPanel.expectHeadingsVisible();
+// await navPanel.expectDateCorrect();
 export class NavigationPanel {
+  
   constructor(
     private readonly page: Page,
     private readonly navPanel: Locator = page
@@ -26,7 +34,7 @@ export class NavigationPanel {
         hasText:
           /^NewsLocallisteniviewTV GuideKidsLifestyleEntertainmentSportEmergencyMore$/,
       })
-      .nth(1),
+      .nth(1 ),
     private readonly profileButton: Locator = page.locator(
       '[data-component="NavigationDropdownTrigger"] span[aria-hidden="true"]'
     ),
