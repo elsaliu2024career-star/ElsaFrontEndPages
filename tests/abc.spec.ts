@@ -1,5 +1,5 @@
 import { test, expect } from '../fixture/authFixture';
-import { NavigationPanel } from '../pages/home-page';
+import { NavigationPanel } from '../pages/HomePage';
 
 /*
 test('check user is logged in and homepage is visible', async ({ LoggedInPage }) => {

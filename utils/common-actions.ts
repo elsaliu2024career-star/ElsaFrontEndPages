@@ -12,7 +12,7 @@ export class CommonActions {
         return typeof locator === 'string'? this.page.locator(locator) : locator;
     };
 
-    async navigate(url:string){
+    async navigate(url: string){
         await this.page.goto(url);
     };
 
