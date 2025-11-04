@@ -1,4 +1,5 @@
 import { expect, Locator, Page } from "@playwright/test";
+import { CommonActions } from "../utils/common-actions";
 
 export class VerifyBrokenPage {
   protected readonly page: Page;
@@ -28,12 +29,15 @@ export class VerifyBrokenPage {
   }
 
   async VerifyImage() {
-    for (let i = 0; i < 3; i++) {
+
+    for (let i = 0; i < this.picture.length; i++) {
       await expect(this.picture[i]).toBeVisible;
       const isLoaded = await this.picture[i].evaluate(
         (el: HTMLImageElement) => el.complete && el.naturalWidth > 0
       );
       expect(isLoaded).toBeFalsy;
-    }
+    };
+
+    
   }
 }
