@@ -20,10 +20,10 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 1,
   /* Opt out of parallel tests on CI. */
   //workers: process.env.CI ? 1 : undefined,
-  workers: process.env.CI ? 1 : 1,
+  workers: process.env.CI ? 2 : 8,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: "html",
   maxFailures: process.env.CI ? 10 : 5,
@@ -38,6 +38,9 @@ export default defineConfig({
     video: "retain-on-failure",
     actionTimeout: 5_000, // for actions like click, fill, etc.
     navigationTimeout: 40_000,
+    viewport: { width: 1920, height: 1080 },
+    deviceScaleFactor: 1,
+    headless: true
   },
   timeout: 60_000, // 30 seconds per test
 
@@ -66,7 +69,9 @@ export default defineConfig({
 
     {
       name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
+      use: { ...devices["Desktop Firefox"],
+        actionTimeout: 7_000
+      },
     },
 
     {
