@@ -23,10 +23,10 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 1,
   /* Opt out of parallel tests on CI. */
   //workers: process.env.CI ? 1 : undefined,
-  workers: process.env.CI ? 2 : 8,
+  workers: process.env.CI ? 8 : 8,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: "html",
-  maxFailures: process.env.CI ? 10 : 5,
+  maxFailures: process.env.CI ? 100 : 5,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -46,7 +46,7 @@ export default defineConfig({
 
   expect: {
     // Maximum time expect() should wait for the condition to be met.
-    timeout: 8_1000,
+    timeout: 8_000,
 
     toHaveScreenshot: {
       // An acceptable amount of pixels that could be different, unset by default.
