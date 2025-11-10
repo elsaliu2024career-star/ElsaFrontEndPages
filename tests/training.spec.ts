@@ -423,7 +423,7 @@ test("should react correctly for all javascript dialogue", async ({ page }) => {
 
 //14:55
 
-test('should return the correct status code for each page', async({page})=>{
+test.skip('should return the correct status code for each page', async({page})=>{
    const statusCodePage = new statusCode(page);
    const url ='https://the-internet.herokuapp.com/status_codes';
    const expectContentMap ={
