@@ -1,4 +1,10 @@
-import { Locator, Page, expect } from "@playwright/test";
+import {
+  APIRequestContext,
+  APIResponse,
+  Locator,
+  Page,
+  expect,
+} from "@playwright/test";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -14,7 +20,10 @@ export class CommonActions {
   // }
 
   async navigate(url: string, time?: number) {
-    const response = await this.page.goto(url, { waitUntil: "load", timeout: time });
+    const response = await this.page.goto(url, {
+      waitUntil: "load",
+      timeout: time,
+    });
     expect(response?.status()).toBe(200);
   }
 
@@ -211,4 +220,55 @@ export class CommonActions {
   async dragSliderToNumber(sliderLocator: Locator, num: string) {
     await sliderLocator.fill(num);
   }
+
+  // async getRequest(
+  //   request: APIRequestContext,
+  //   url: string,
+  //   headers: Record<string, string> = {}
+  // ): Promise<APIResponse> {
+  //   const response: APIResponse = await request.get(url, { headers: headers });
+  //   await this.verifyAPIResponse(response);
+  //   return response;
+  // }
+
+  // async postRequest(
+  //   request: APIRequestContext,
+  //   url: string,
+  //   data?: any,
+  //   headers: Record<string, string> = {}
+  // ): Promise<APIResponse> {
+  //   const response: APIResponse = await request.post(url, {
+  //     data: data,
+  //     headers: headers,
+  //   });
+  //   await this.verifyAPIResponse(response);
+  //   return response;
+  // }
+
+  // async deleteRequest(
+  //   request: APIRequestContext,
+  //   url: string,
+  //   headers: Record<string, string> = {}
+  // ): Promise<APIResponse> {
+  //   const response = await request.delete(url, { headers: headers });
+  //   await this.verifyAPIResponse(response);
+  //   return response;
+  // }
+
+  // async patchRequest(
+  //   request: APIRequestContext,
+  //   url: string,
+  //   headers: Record<string, string> = {},
+  //   data?: any
+  // ): Promise<APIResponse> {
+  //   const response: APIResponse = await request.patch(url, {
+  //     headers: headers,
+  //     data: data,
+  //   });
+
+  //   await this.verifyAPIResponse(response);
+  //   return response;
+  // }
+
+
 }

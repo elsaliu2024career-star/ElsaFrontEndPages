@@ -23,6 +23,7 @@ import { JavaDialogue } from "../pages/javascript-dialogue";
 import { parseArgs } from "util";
 import  {statusCode} from "../pages/status-code"
 import { link } from "fs";
+import { ChatMessage } from "../pages/database-api";
 
 test("verify login page of basic auth", async ({ authPage }) => {
   test.setTimeout(30_000);
@@ -455,4 +456,63 @@ test('should return the correct status code for each page', async({page})=>{
    };
 });
 
-//15:36
+test('The API should return expected response for chat messages', async({request})=>{
+  const ChatMessagePage = new ChatMessage(request);
+  const baseURL = 'http://172.20.10.2:8000'
+
+  await test.step('Get chat messages from API', async()=>{
+    const apiUrl = `${baseURL}/chat-messages/`;
+    const headers = {
+      'Cache-Control': "no-cache",
+      'Accept': "application/json",
+      'Connection': 'keep-alive',
+      'Accept-Encoding': 'gzip, deflate, br',
+    };
+
+    // const response = await request.get(apiUrl, {headers: headers});
+    // const responseBody = await response.json();
+    // console.log('Response Body:', responseBody);
+
+    const response = await ChatMessagePage.getChatMessages(apiUrl,headers);
+    console.log(`the response status is ${response.status()}`);
+    expect.soft(response.status()).toBe(200);
+    const responseBody = await response.json();
+    console.log('Response Body:', responseBody);
+
+    expect(responseBody).toEqual(expect.arrayContaining([{avatar: 'E', name:'Elsa Zhang', last_message: 'Message 1'}]));
+    for(const user of responseBody){
+         expect.soft(user).toEqual(expect.objectContaining({avatar: expect.any(String),name: expect.any(String),last_message: expect.any(String)}));
+    }; 
+
+    await test.step('Should get all the Name List as expected', async()=>{
+      const apiURL = `${baseURL}/reviews/`;
+      const response = await ChatMessagePage.getChatMessages(apiURL,headers);
+      expect.soft(response.status()).toBe(200);
+      const responseBody = await response.json();
+      console.log('Response Body:', responseBody);
+
+      // expect(responseBody).toEqual(expect.arrayContaining([{
+      //   person_name: 'Elsa Zhang',
+      //   role: 'Great service!',
+      //   avatar: 'E',
+      //   rating: 5,
+      //   review: 'Hello, I’m Elsa. I’m from China and now living in Melbourne. My child recently joined the school, and I want to understand how they’re settling in—both academically and socially.',
+      // }]));
+
+      for(const user of responseBody){
+        expect(user).toEqual(expect.objectContaining({
+        person_name: expect.any(String),
+        role: expect.any(String),
+        avatar: expect.any(String),
+        rating: expect.any(Number),
+        review: expect.any(String),
+      }));
+      };
+
+    });
+  
+  });
+
+
+
+});
