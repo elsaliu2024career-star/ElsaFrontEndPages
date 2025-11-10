@@ -25,10 +25,10 @@ jobs:
     # - name: Install Playwright Browsers
     #   run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test -g training.spec.ts --reporter=list,html --output=playwright-report/self-training-test
+      run: npx playwright test -g training.spec.ts --reporter=list,html --output=playwright-report
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
-        path: playwright-report/self-training-test
+        path: playwright-report
         retention-days: 30
