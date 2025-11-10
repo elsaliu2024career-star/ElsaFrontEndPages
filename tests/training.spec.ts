@@ -488,16 +488,11 @@ test('The API should return expected response for chat messages', async({request
       const apiURL = `${baseURL}/reviews/`;
       const response = await ChatMessagePage.getChatMessages(apiURL,headers);
       expect.soft(response.status()).toBe(200);
+      expect.soft(response.headers()['content-type']).toContain('application/json');
       const responseBody = await response.json();
+      expect.soft(responseBody.length).toBeGreaterThan(0);
       console.log('Response Body:', responseBody);
 
-      // expect(responseBody).toEqual(expect.arrayContaining([{
-      //   person_name: 'Elsa Zhang',
-      //   role: 'Great service!',
-      //   avatar: 'E',
-      //   rating: 5,
-      //   review: 'Hello, I’m Elsa. I’m from China and now living in Melbourne. My child recently joined the school, and I want to understand how they’re settling in—both academically and socially.',
-      // }]));
 
       for(const user of responseBody){
         expect(user).toEqual(expect.objectContaining({
