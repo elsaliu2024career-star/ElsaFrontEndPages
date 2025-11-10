@@ -11,6 +11,10 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.56.1-noble
       options: --user 1001
+    strategy:
+      fail-fast: false
+      matrix: 
+        env: [staging, production]
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -21,7 +25,7 @@ jobs:
     # - name: Install Playwright Browsers
     #   run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test -g training.spec.ts --reporter=list,html --output=playwright-report
+      run: npx playwright test -g training.spec.ts --reporter=list,html --output=playwright-report/self-training-test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:

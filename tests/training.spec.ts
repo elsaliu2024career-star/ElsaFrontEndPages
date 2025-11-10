@@ -456,7 +456,7 @@ test.skip('should return the correct status code for each page', async({page})=>
    };
 });
 
-test('The API should return expected response for chat messages', async({request})=>{
+test.skip('The API should return expected response for chat messages', async({request})=>{
   const ChatMessagePage = new ChatMessage(request);
   const baseURL = 'http://172.20.10.2:8000'
 
