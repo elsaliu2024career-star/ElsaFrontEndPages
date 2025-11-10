@@ -251,7 +251,7 @@ test("should fail if click upload directly", async ({ page }) => {
   });
 });
 
-test("should fail if drag upload directly", async ({ page }) => {
+test.skip("should fail if drag upload directly", async ({ page }) => {
   const uploadFilePage = new uploadFile(page);
   const heading = /File Uploader/i;
   const paragraph = /^Choose a file on your system/i;

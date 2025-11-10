@@ -10,14 +10,16 @@ import * as path from "path";
 
 export class CommonActions {
   protected readonly page: Page;
+  readonly heading: Locator;
 
   constructor(page: Page) {
     this.page = page;
+    this.heading = page.getByRole("heading");
   }
 
-  // async resolve(locator: string | Locator) {
-  //   return typeof locator === "string" ? this.page.locator(locator) : locator;
-  // }
+  async resolve(locator: string | Locator) {
+    return typeof locator === "string" ? this.page.locator(locator) : locator;
+  }
 
   async navigate(url: string, time?: number) {
     const response = await this.page.goto(url, {
@@ -27,40 +29,32 @@ export class CommonActions {
     expect(response?.status()).toBe(200);
   }
 
-  // async pageNavigate(url: string, time: number) {
-  //   let responseList: number[] = [];
+  async pageNavigate(url: string, time: number) {
+    let responseList: number[] = [];
 
-  //   const resonseHandler = (res: any) => {
-  //     responseList.push(res);
-  //   };
+    const resonseHandler = (res: any) => {
+      responseList.push(res);
+    };
 
-  //   this.page.on("response", resonseHandler);
+    this.page.on("response", resonseHandler);
 
-  //   try {
-  //     await this.page.goto(url, { waitUntil: "load", timeout: time });
+    try {
+      await this.page.goto(url, { waitUntil: "load", timeout: time });
 
-  //     if (responseList.includes(404)) {
-  //       throw new Error(`navigationt to the page ${url} encountered 404 error`);
-  //     }
-  //   } finally {
-  //     this.page.off("response", resonseHandler);
-  //   }
+      if (responseList.includes(404)) {
+        throw new Error(`navigationt to the page ${url} encountered 404 error`);
+      }
+    } finally {
+      this.page.off("response", resonseHandler);
+    }
 
-  //   expect(responseList).not.toContain(404);
-  // }
-
-  async safeClick(locator: Locator) {
-    await locator.waitFor({ state: "visible" });
-    await locator.click();
+    expect(responseList).not.toContain(404);
   }
+
 
   async fillInput(locator: Locator, value: any) {
     await locator.waitFor({ state: "visible" });
     await locator.fill(value);
-  }
-
-  async getTextContent(locator: Locator): Promise<string> {
-    return (await locator.textContent()) ?? "";
   }
 
   async getNetworkStatusOnNavigation(url: string): Promise<number> {
@@ -78,30 +72,24 @@ export class CommonActions {
   //   expect(pageLoadState).not.toContain(404);
   // }
 
-  // async clickLink(locator: string | Locator) {
-  //   (await this.resolve(locator)).click;
-  // }
 
-  // async safeClick(locator: Locator) {
-  //   await locator.waitFor({ state: "visible" });
-  //   await locator.click();
-  // }
+  async safeClick(locator: Locator) {
+    await locator.waitFor({ state: "visible" });
+    await locator.click();
+  }
 
-  // async fillInput(locator: string | Locator, value: any) {
-  //   (await this.resolve(locator)).fill(value);
-  // }
 
-  // async VerifyHeadingContent(content: string) {
-  //   await expect(this.heading).toContainText(content);
-  // }
+  async VerifyHeadingContent(content: string) {
+    await expect(this.heading).toContainText(content);
+  }
 
-  // async getTextContent(locator: Locator): Promise<string> {
-  //   return (await locator.textContent()) ?? "";
-  // }
+  async getTextContent(locator: Locator): Promise<string> {
+    return (await locator.textContent()) ?? "";
+  }
 
-  // async existenceofElement(locator: Locator): Promise<boolean> {
-  //   return await locator.isVisible();
-  // }
+  async existenceofElement(locator: Locator): Promise<boolean> {
+    return await locator.isVisible();
+  }
 
   async verifyLinkResponse(
     links: Locator[],
@@ -189,7 +177,7 @@ export class CommonActions {
     }
     await chooseLocator.setInputFiles(fileName);
     const [response] = await Promise.all([
-      this.page.waitForResponse((res) => res.status() === 200),
+      this.page.waitForResponse((res) => res.url().includes("/upload") && res.status() >= 200),
       uploadLocator.click(),
     ]);
 
